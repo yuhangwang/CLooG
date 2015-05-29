@@ -17,12 +17,26 @@ The binary/ folder contains both a tar.gz file and a folder, which are equivalen
 * Compiler: gcc version 4.4.7 20120313 (Red Hat 4.4.7-11)
 
 ### Compilation steps
+#### Version: 0.15.11
 ```bash
 wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-ppl-0.15.11.tar.gz
 tar xvf cloog-ppl-0.15.11.tar.gz
-mkdir build_cloog-ppl-0.15
-cd build_cloog-ppl-0.15
-../cloog-ppl-0.15/configure --prefix=/home/steven/install/libcloog/0.15.11 --with-ppl=/home/steven/install/libppl/0.11 --with-gmp=/home/steven/install/libgmp/with_cxx_support/for_gcc_4.4.7/4.3.2
+mkdir build_cloog-ppl-0.15.11
+cd build_cloog-ppl-0.15.11
+../cloog-ppl-0.15.11/configure --prefix=/home/steven/install/libcloog/0.15.11 --with-ppl=/home/steven/install/libppl/0.11 --with-gmp=/home/steven/install/libgmp/with_cxx_support/for_gcc_4.4.7/4.3.2
+make -j10
+make check -j10 | tee QualityVerification.txt
+make install
+```
+
+
+#### Version: 0.18.0
+```bash
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.0.tar.gz
+tar xvf cloog-ppl-0.18.0.tar.gz
+mkdir build_cloog-ppl-0.18.0
+cd build_cloog-ppl-0.18.0
+../cloog-ppl-0.18.0/configure --prefix=/home/steven/install/libcloog/0.18.0 --with-ppl=/home/steven/install/libppl/0.11 --with-gmp=/home/steven/install/libgmp/with_cxx_support/for_gcc_4.4.7/4.3.2
 make -j10
 make check -j10 | tee QualityVerification.txt
 make install

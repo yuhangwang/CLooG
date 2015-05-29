@@ -1,0 +1,348 @@
+Making check in .
+make[1]: Entering directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11'
+make[1]: Leaving directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11'
+Making check in doc
+make[1]: Entering directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11/doc'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11/doc'
+Making check in test
+make[1]: Entering directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11/test'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11/test'
+make test -C test
+make[1]: Entering directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11/test'
+             /*-----------------------------------------------*
+              *                 Testing CLooG                 *
+              *-----------------------------------------------*/
+failedtest=0 ; \
+	echo "--- Testing C files..." ; \
+	for x in 1point-1 1point-2 4-param basic-bounds-1 basic-bounds-2 basic-bounds-3 basic-bounds-4 basic-bounds-5 basic-bounds-6 byu98-1-2-3 cholesky cholesky2 classen darte donotsimp dot dot2 double durbin_e_s emploi esced ex1 forwardsub-1-1-2 forwardsub-2-1-2-3 forwardsub-3-1-2 gauss gesced gesced2 gesced3 guide iftest iftest2 infinite infinite2 infinite3 infinite4 largeur levenshtein-1-2-3 lineality-1-2 lineality-2-1-2 logo logopar lu lu2 lub lux min-1-1 min-2-1 min-3-1 min-4-1 mode multi-mm-1 no_lindep not_equal orc rectangle square+triangle-1-1-2-3 swim test thomasset tiling uday_scalars vivien vivien2 wavefront yosr yosr2 ./non_optimal/nul_complex1 ./non_optimal/usvd_e_t ./non_optimal/youcef ./reservoir/cholesky2 ./reservoir/fusion1 ./reservoir/fusion2 ./reservoir/jacobi2 ./reservoir/jacobi3 ./reservoir/lim-lam1 ./reservoir/lim-lam2 ./reservoir/lim-lam3 ./reservoir/lim-lam4 ./reservoir/lim-lam5 ./reservoir/lim-lam6 ./reservoir/liu-zhuge1 ./reservoir/loechner3 ./reservoir/loechner4 ./reservoir/loechner5 ./reservoir/mg-interp2 ./reservoir/mg-interp ./reservoir/mg-psinv ./reservoir/mg-resid ./reservoir/mg-rprj3 ./reservoir/pingali1 ./reservoir/pingali2 ./reservoir/pingali3 ./reservoir/pingali4 ./reservoir/pingali5 ./reservoir/pingali6 ./reservoir/QR ./reservoir/tang-xue1 ./reservoir/two    ; do \
+		echo "Verify file $x" ; \
+		../cloog ../../cloog-ppl-0.15.11/test/$x.cloog > ttemp ; \
+		diff -w --ignore-matching-lines='CLooG' ttemp ../../cloog-ppl-0.15.11/test/$x.c.ppl ; \
+		result=$?; \
+		if [ "$result" -ne "0" ] ; then \
+			echo "!!! Error: $x is not the same" ; \
+			failedtest=`expr $failedtest + 1` ; \
+		else \
+			echo "$x passed" ; \
+	        fi ; \
+	done ; \
+	echo "--- Testing FORTRAN files..." ; \
+	for x in dartef iftestf levenshtein-1-2-3f yosrf ; do \
+		echo "Verify file $x" ; \
+		../cloog ../../cloog-ppl-0.15.11/test/$x.cloog > ttemp ; \
+		diff -w --ignore-matching-lines='CLooG' ttemp ../../cloog-ppl-0.15.11/test/$x.f.ppl ; \
+		result=$?; \
+		if [ "$result" -ne "0" ] ; then \
+			echo "!!! Error: $x is not the same" ; \
+			failedtest=`expr $failedtest + 1` ; \
+		else \
+			echo "$x passed" ; \
+	        fi ; \
+	done ; \
+	echo "--- Testing STRIDED files..." ; \
+	for x in nul_basic1 nul_basic2 nul_lcpc multi-stride multi-stride2 reservoir/bastoul3 reservoir/stride reservoir/stride2 ; do \
+		echo "Verify file $x" ; \
+		../cloog ../../cloog-ppl-0.15.11/test/$x.cloog \
+		-strides 1 > ttemp ; \
+		diff -w --ignore-matching-lines='CLooG' ttemp ../../cloog-ppl-0.15.11/test/$x.c.ppl ; \
+		result=$?; \
+		if [ "$result" -ne "0" ] ; then \
+			echo "!!! Error: $x is not the same" ; \
+			failedtest=`expr $failedtest + 1` ; \
+		else \
+			echo "$x passed" ; \
+	        fi ; \
+	done ; \
+	echo "--- Testing SPECIAL OPTIONS files..." ; \
+	        echo "Verify file vasilache (-f 8 -l 9)" ; \
+		x=vasilache ; \
+		../cloog ../../cloog-ppl-0.15.11/test/$x.cloog \
+		-f 8 -l 9 > ttemp ; \
+		diff -w --ignore-matching-lines='CLooG' ttemp ../../cloog-ppl-0.15.11/test/$x.c.ppl ; \
+		result=$?; \
+		if [ "$result" -ne "0" ] ; then \
+			echo "!!! Error: $x is not the same" ; \
+			failedtest=`expr $failedtest + 1` ; \
+		else \
+			echo "$x passed" ; \
+	        fi ; \
+	        echo "Verify file merge (-f -1)" ; \
+		x=merge ; \
+		../cloog ../../cloog-ppl-0.15.11/test/$x.cloog \
+		-f -1  > ttemp ; \
+		diff -w --ignore-matching-lines='CLooG' ttemp ../../cloog-ppl-0.15.11/test/$x.c.ppl ; \
+		result=$?; \
+		if [ "$result" -ne "0" ] ; then \
+			echo "!!! Error: $x is not the same" ; \
+			failedtest=`expr $failedtest + 1` ; \
+		else \
+			echo "$x passed" ; \
+	        fi ; \
+	        echo "Verify file equality (-f -1 -l 2 -override)" ; \
+		x=equality ; \
+		../cloog ../../cloog-ppl-0.15.11/test/$x.cloog \
+		-f -1 -l 2 -override  > ttemp ; \
+		diff -w --ignore-matching-lines='CLooG' ttemp ../../cloog-ppl-0.15.11/test/$x.c.ppl ; \
+		result=$?; \
+		if [ "$result" -ne "0" ] ; then \
+			echo "!!! Error: $x is not the same" ; \
+			failedtest=`expr $failedtest + 1` ; \
+		else \
+			echo "$x passed" ; \
+	        fi ; \
+	        echo "Verify file equality (-f -1 -l 4 -esp 1 -override)" ; \
+		x=equality2; \
+		../cloog ../../cloog-ppl-0.15.11/test/$x.cloog \
+		-f -1 -l 4 -esp 1 -override > ttemp ; \
+		diff -w --ignore-matching-lines='CLooG' ttemp ../../cloog-ppl-0.15.11/test/$x.c.ppl ; \
+		result=$?; \
+		if [ "$result" -ne "0" ] ; then \
+			echo "!!! Error: $x is not the same" ; \
+			failedtest=`expr $failedtest + 1` ; \
+		else \
+			echo "$x passed" ; \
+	        fi ; \
+	rm ttemp ; \
+	if [ $failedtest != 0 ] ; then \
+		echo "$failedtest tests failed" ; \
+	else \
+	        echo "CLooG works correctly :-) !" ; \
+        fi
+--- Testing C files...
+Verify file 1point-1
+1point-1 passed
+Verify file 1point-2
+1point-2 passed
+Verify file 4-param
+4-param passed
+Verify file basic-bounds-1
+basic-bounds-1 passed
+Verify file basic-bounds-2
+basic-bounds-2 passed
+Verify file basic-bounds-3
+basic-bounds-3 passed
+Verify file basic-bounds-4
+basic-bounds-4 passed
+Verify file basic-bounds-5
+basic-bounds-5 passed
+Verify file basic-bounds-6
+basic-bounds-6 passed
+Verify file byu98-1-2-3
+byu98-1-2-3 passed
+Verify file cholesky
+cholesky passed
+Verify file cholesky2
+cholesky2 passed
+Verify file classen
+classen passed
+Verify file darte
+darte passed
+Verify file donotsimp
+donotsimp passed
+Verify file dot
+dot passed
+Verify file dot2
+dot2 passed
+Verify file double
+double passed
+Verify file durbin_e_s
+durbin_e_s passed
+Verify file emploi
+emploi passed
+Verify file esced
+esced passed
+Verify file ex1
+ex1 passed
+Verify file forwardsub-1-1-2
+forwardsub-1-1-2 passed
+Verify file forwardsub-2-1-2-3
+forwardsub-2-1-2-3 passed
+Verify file forwardsub-3-1-2
+forwardsub-3-1-2 passed
+Verify file gauss
+gauss passed
+Verify file gesced
+gesced passed
+Verify file gesced2
+gesced2 passed
+Verify file gesced3
+gesced3 passed
+Verify file guide
+guide passed
+Verify file iftest
+iftest passed
+Verify file iftest2
+iftest2 passed
+Verify file infinite
+infinite passed
+Verify file infinite2
+infinite2 passed
+Verify file infinite3
+infinite3 passed
+Verify file infinite4
+infinite4 passed
+Verify file largeur
+largeur passed
+Verify file levenshtein-1-2-3
+levenshtein-1-2-3 passed
+Verify file lineality-1-2
+lineality-1-2 passed
+Verify file lineality-2-1-2
+lineality-2-1-2 passed
+Verify file logo
+logo passed
+Verify file logopar
+logopar passed
+Verify file lu
+lu passed
+Verify file lu2
+lu2 passed
+Verify file lub
+lub passed
+Verify file lux
+lux passed
+Verify file min-1-1
+min-1-1 passed
+Verify file min-2-1
+min-2-1 passed
+Verify file min-3-1
+min-3-1 passed
+Verify file min-4-1
+min-4-1 passed
+Verify file mode
+mode passed
+Verify file multi-mm-1
+multi-mm-1 passed
+Verify file no_lindep
+no_lindep passed
+Verify file not_equal
+not_equal passed
+Verify file orc
+orc passed
+Verify file rectangle
+rectangle passed
+Verify file square+triangle-1-1-2-3
+square+triangle-1-1-2-3 passed
+Verify file swim
+swim passed
+Verify file test
+test passed
+Verify file thomasset
+thomasset passed
+Verify file tiling
+tiling passed
+Verify file uday_scalars
+uday_scalars passed
+Verify file vivien
+vivien passed
+Verify file vivien2
+vivien2 passed
+Verify file wavefront
+wavefront passed
+Verify file yosr
+yosr passed
+Verify file yosr2
+yosr2 passed
+Verify file ./non_optimal/nul_complex1
+./non_optimal/nul_complex1 passed
+Verify file ./non_optimal/usvd_e_t
+./non_optimal/usvd_e_t passed
+Verify file ./non_optimal/youcef
+./non_optimal/youcef passed
+Verify file ./reservoir/cholesky2
+./reservoir/cholesky2 passed
+Verify file ./reservoir/fusion1
+./reservoir/fusion1 passed
+Verify file ./reservoir/fusion2
+./reservoir/fusion2 passed
+Verify file ./reservoir/jacobi2
+./reservoir/jacobi2 passed
+Verify file ./reservoir/jacobi3
+./reservoir/jacobi3 passed
+Verify file ./reservoir/lim-lam1
+./reservoir/lim-lam1 passed
+Verify file ./reservoir/lim-lam2
+./reservoir/lim-lam2 passed
+Verify file ./reservoir/lim-lam3
+./reservoir/lim-lam3 passed
+Verify file ./reservoir/lim-lam4
+./reservoir/lim-lam4 passed
+Verify file ./reservoir/lim-lam5
+./reservoir/lim-lam5 passed
+Verify file ./reservoir/lim-lam6
+./reservoir/lim-lam6 passed
+Verify file ./reservoir/liu-zhuge1
+./reservoir/liu-zhuge1 passed
+Verify file ./reservoir/loechner3
+./reservoir/loechner3 passed
+Verify file ./reservoir/loechner4
+./reservoir/loechner4 passed
+Verify file ./reservoir/loechner5
+./reservoir/loechner5 passed
+Verify file ./reservoir/mg-interp2
+./reservoir/mg-interp2 passed
+Verify file ./reservoir/mg-interp
+./reservoir/mg-interp passed
+Verify file ./reservoir/mg-psinv
+./reservoir/mg-psinv passed
+Verify file ./reservoir/mg-resid
+./reservoir/mg-resid passed
+Verify file ./reservoir/mg-rprj3
+./reservoir/mg-rprj3 passed
+Verify file ./reservoir/pingali1
+./reservoir/pingali1 passed
+Verify file ./reservoir/pingali2
+./reservoir/pingali2 passed
+Verify file ./reservoir/pingali3
+./reservoir/pingali3 passed
+Verify file ./reservoir/pingali4
+./reservoir/pingali4 passed
+Verify file ./reservoir/pingali5
+./reservoir/pingali5 passed
+Verify file ./reservoir/pingali6
+./reservoir/pingali6 passed
+Verify file ./reservoir/QR
+./reservoir/QR passed
+Verify file ./reservoir/tang-xue1
+./reservoir/tang-xue1 passed
+Verify file ./reservoir/two
+./reservoir/two passed
+--- Testing FORTRAN files...
+Verify file dartef
+dartef passed
+Verify file iftestf
+iftestf passed
+Verify file levenshtein-1-2-3f
+levenshtein-1-2-3f passed
+Verify file yosrf
+yosrf passed
+--- Testing STRIDED files...
+Verify file nul_basic1
+nul_basic1 passed
+Verify file nul_basic2
+nul_basic2 passed
+Verify file nul_lcpc
+nul_lcpc passed
+Verify file multi-stride
+multi-stride passed
+Verify file multi-stride2
+multi-stride2 passed
+Verify file reservoir/bastoul3
+reservoir/bastoul3 passed
+Verify file reservoir/stride
+reservoir/stride passed
+Verify file reservoir/stride2
+reservoir/stride2 passed
+--- Testing SPECIAL OPTIONS files...
+Verify file vasilache (-f 8 -l 9)
+vasilache passed
+Verify file merge (-f -1)
+merge passed
+Verify file equality (-f -1 -l 2 -override)
+equality passed
+Verify file equality (-f -1 -l 4 -esp 1 -override)
+equality2 passed
+CLooG works correctly :-) !
+make[1]: Leaving directory `/home/steven/Programs/LibCLooG/build_cloog-ppl-0.15.11/test'

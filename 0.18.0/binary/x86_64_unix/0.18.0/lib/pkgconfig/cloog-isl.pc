@@ -14,5 +14,5 @@ Name: cloog-isl
 Description: cloog-isl Library
 Version: 0.18.0
 Requires: 
-Libs: -L${libdir} -L/lib -lcloog-isl -lgmp
-Cflags: -I${includedir} -DCLOOG_INT_GMP=1
+Libs: -L${libdir} -L/Scr/scr-test-steven/install/libgmp/4.3.2/lib -lcloog-isl -lgmp
+Cflags: -I${includedir} -I/Scr/scr-test-steven/install/libgmp/4.3.2/include -DCLOOG_INT_GMP=1

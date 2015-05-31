@@ -17,7 +17,7 @@ old_library='libcloog-isl.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/Scr/scr-test-steven/install/libisl/0.12.2/lib -L/Scr/scr-test-steven/install/libgmp/4.3.2/lib /Scr/scr-test-steven/install/libisl/0.12.2/lib/libisl.la -lgmp /Scr/scr-test-steven/install/libgmp/4.3.2/lib/libgmp.la'
+dependency_libs=' -L/Scr/scr-test-steven/install/libisl/0.12.2/lib -L/Scr/scr-test-steven/install/libgmp/4.3.2/lib /Scr/scr-test-steven/install/libisl/0.12.2/lib/libisl.la /Scr/scr-test-steven/install/libgmp/4.3.2/lib/libgmp.la'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

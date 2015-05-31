@@ -42,5 +42,17 @@ make check -j10 | tee QualityVerification.txt
 make install
 ```
 
+#### Version: 0.18.1
+```bash
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
+tar xvf cloog-ppl-0.18.1.tar.gz
+mkdir build_cloog-0.18.1
+cd build_cloog-0.18.1
+../cloog-0.18.1/configure --prefix=/home/steven/install/libcloog/0.18.1 --with-gmp=system --with-gmp-prefix=/home/steven/install/libgmp/4.3.2 --with-gmp-exec-prefix=/home/steven/install/libgmp/4.3.2 --with-isl=system --with-isl-prefix=/home/steven/install/libisl/0.12.2 --with-isl-exec-prefix=/home/steven/install/libisl/0.12.2 --enable-portable-binary=yes --enable-shared=yes --enable-static=yes
+make -j10
+make check -j10 | tee QualityVerification.txt
+make install
+```
+
 ### Quality verification
 See the "QualityVerification.txt" for the output of "make check".
